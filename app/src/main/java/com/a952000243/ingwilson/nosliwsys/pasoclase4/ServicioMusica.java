@@ -1,11 +1,13 @@
 package com.a952000243.ingwilson.nosliwsys.pasoclase4;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
@@ -27,7 +29,14 @@ public class ServicioMusica extends Service {
         NotificationCompat.Builder notific = new NotificationCompat.Builder(this)
                 .setContentTitle("Creando Servicio de Música")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText("información adicional");
+                .setContentText("información adicional")
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),
+                        android.R.drawable.ic_media_play))
+                .setWhen(System.currentTimeMillis() + 1000 * 60 * 60)
+                .setContentInfo("más info")
+                .setTicker("Texto en barra de estado")
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setDefaults(Notification.DEFAULT_VIBRATE);
         // Para lanzar una actividad
         PendingIntent intencionPendiente = PendingIntent.getActivity(
                 this, 0, new Intent(this, Servicio.class), 0);
