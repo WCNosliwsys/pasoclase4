@@ -2,6 +2,7 @@ package com.a952000243.ingwilson.nosliwsys.pasoclase4;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,10 @@ public class ServicioMusica extends Service {
                 .setContentTitle("Creando Servicio de Música")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentText("información adicional");
+        // Para lanzar una actividad
+        PendingIntent intencionPendiente = PendingIntent.getActivity(
+                this, 0, new Intent(this, Servicio.class), 0);
+        notific.setContentIntent(intencionPendiente);
         NotificationManager notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -52,6 +57,11 @@ public class ServicioMusica extends Service {
         Toast.makeText(this,"Servicio detenido",
                 Toast.LENGTH_SHORT).show();
         reproductor.stop();
+        //Eliminando la notificacion
+        NotificationManager notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(ID_NOTIFICACION_CREAR);
+
     }
     @Override public IBinder onBind(Intent intencion) {
         return null;
