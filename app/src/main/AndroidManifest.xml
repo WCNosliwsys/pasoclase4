@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.a952000243.ingwilson.nosliwsys.pasoclase4">
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name ="android.permission.RECEIVE_SMS"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +21,11 @@
         <receiver android:name="ReceptorLlamadas" >
             <intent-filter >
                 <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="ReceptorSMS" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
     </application>
